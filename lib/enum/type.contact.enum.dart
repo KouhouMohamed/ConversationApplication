@@ -1,0 +1,1 @@
+enum TypeContact{STUDENT,DEVELOPER}
