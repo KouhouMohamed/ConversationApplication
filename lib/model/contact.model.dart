@@ -13,6 +13,7 @@ class Contact{
     Message(content: "Bonjour",type: TypeMessage.SEND),
     Message(content: "Bonjour comment allez vous ?",type: TypeMessage.RECEIVE)
   ];
+  List<Message> messagesToDelete = [];
   Color myColor = Color.fromARGB(255,Random().nextInt(255) , Random().nextInt(255), Random().nextInt(255));
 
 

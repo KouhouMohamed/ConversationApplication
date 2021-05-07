@@ -2,6 +2,7 @@ import 'package:contacts_app/bloc/message/message.bloc.dart';
 import 'package:contacts_app/bloc/message/message.event.dart';
 import 'package:contacts_app/bloc/message/message.state.dart';
 import 'package:contacts_app/enum/type.message.dart';
+import 'package:contacts_app/model/message.model.dart';
 import 'package:contacts_app/ui/pages/messages/widgets/item.message.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:contacts_app/model/contact.model.dart';
@@ -26,14 +27,13 @@ class ListMessage extends StatelessWidget {
         }*/
         return Expanded(
           child: ListView.builder(
-
               itemCount: contact.messages.length,
               itemBuilder: (context, index) {
                 return ItemMessage(
-                  content: contact.messages[index].content,
+                  message: contact.messages[index],
                   myColor: contact.myColor,
-                  type: contact.messages[index].type,
                 );
+
                /* if (contact.messages[index].type == TypeMessage.RECEIVE) {
                   myAlignement = MainAxisAlignment.start;
                   myColor = contact.myColor;

@@ -12,3 +12,8 @@ class GetContactEvent extends MessageEvent{
   Contact contact;
   GetContactEvent({this.contact});
 }
+class DeleteMessageEvent extends MessageEvent{
+  String message;
+  Contact contact;
+  DeleteMessageEvent({this.contact, this.message});
+}
