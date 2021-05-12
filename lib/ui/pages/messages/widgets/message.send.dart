@@ -10,7 +10,8 @@ class SendMessage extends StatelessWidget {
   TextEditingController textEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return (contact!=null && contact != Contact())?
+    Center(
         child: Row(
           children: [
             Expanded(
@@ -39,7 +40,9 @@ class SendMessage extends StatelessWidget {
                   , color: Colors.indigoAccent,
                 ),
                 onPressed: (){
+                  print("*************${contact.name}");
                   context.read<MessageBloc>().add(SendMessageEvent(
+
                     contact: contact,
                     messageToSend: textEditingController.text
                   )
@@ -50,6 +53,6 @@ class SendMessage extends StatelessWidget {
       ]
         )
 
-    );
+    ):Container();
   }
 }

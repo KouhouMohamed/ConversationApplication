@@ -5,5 +5,6 @@ class MessageState{
   Contact contact;
   List<Message> messages;
 
-  MessageState({this.contact,this.messages});
+  List<Message> messagesToDelete;
+  MessageState({this.contact,this.messages,this.messagesToDelete});
 }

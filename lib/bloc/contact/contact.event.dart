@@ -9,5 +9,11 @@ class LoadDevelopersContactEvent extends ContactEvent{}
 class DeleteMessageEvent extends ContactEvent{
   Contact contact;
   Message messageToDelete;
-  DeleteMessageEvent({this.contact, this.messageToDelete});
+  DeleteMessageEvent({this.contact});
+}
+
+class AddMessageToDeleteList extends ContactEvent{
+  Contact contact;
+  Message messageToDelete;
+  AddMessageToDeleteList({this.contact, this.messageToDelete});
 }

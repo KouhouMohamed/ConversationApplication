@@ -29,7 +29,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context)=>MessageBloc(
           initialState: MessageState(
             messages: [],
-            contact: Contact()
+            //contact: Contact(),
+            messagesToDelete: []
           )
         ),)
       ],
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
           '/contacts': (context) => ContactPage(),
           '/messages':(context) => ContactAndMessagePage(),
         },
-        initialRoute: '/contacts',
+        initialRoute: '/messages',
       ),
     );
   }

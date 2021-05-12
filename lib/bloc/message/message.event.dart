@@ -1,4 +1,5 @@
 import 'package:contacts_app/model/contact.model.dart';
+import 'package:contacts_app/model/message.model.dart';
 
 abstract class MessageEvent{
 }
@@ -13,7 +14,18 @@ class GetContactEvent extends MessageEvent{
   GetContactEvent({this.contact});
 }
 class DeleteMessageEvent extends MessageEvent{
-  String message;
   Contact contact;
-  DeleteMessageEvent({this.contact, this.message});
+  DeleteMessageEvent({this.contact});
+}
+
+class AddMessageToDeleteList extends MessageEvent{
+  Contact contact;
+  Message messageToDelete;
+  AddMessageToDeleteList({this.contact, this.messageToDelete});
+}
+
+class RemoveMessageFromDeleteList extends MessageEvent{
+  Contact contact;
+  Message messageToDelete;
+  RemoveMessageFromDeleteList({this.contact, this.messageToDelete});
 }

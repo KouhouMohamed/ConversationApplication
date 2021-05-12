@@ -1,9 +1,12 @@
+import 'package:contacts_app/bloc/message/message.event.dart';
+import 'package:contacts_app/bloc/message/message.bloc.dart';
+import 'package:contacts_app/bloc/message/message.state.dart';
 import 'package:contacts_app/model/contact.model.dart';
-import 'package:contacts_app/model/message.model.dart';
-import 'package:contacts_app/ui/pages/messages/widgets/item.message.dart';
+import 'package:contacts_app/ui/pages/messages/widgets/conversation.dart';
 import 'package:contacts_app/ui/pages/messages/widgets/list.message.dart';
 import 'package:contacts_app/ui/pages/messages/widgets/message.send.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MessagePage extends StatelessWidget {
   Contact contact;
@@ -11,39 +14,31 @@ class MessagePage extends StatelessWidget {
   MessagePage({this.contact});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(contact.name),
+    return BlocBuilder<MessageBloc,MessageState>(builder: (context,state){
+      return Scaffold(
+          appBar: AppBar(
+            title: Text(contact.name),
 
-        actions: [
-          (contact.messagesToDelete.length != 0)?IconButton(
-            icon: Icon(Icons.delete),
-            onPressed: (){
-                contact.messagesToDelete.forEach((element) {
-                  contact.messages.remove(element);
-                });
-            }):
-          CircleAvatar(
-            child: Text(contact.profile),
-            backgroundColor: contact.myColor,
-          )
-        ],
-      ),
-      body:Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Expanded(
+            actions: [
+              (state.messagesToDelete==null || state.messagesToDelete.length == 0)?CircleAvatar(
+                child: Text(contact.profile),
+                backgroundColor: Colors.red,
+              ):
+              IconButton(
+                  icon: Icon(Icons.delete),
+                  onPressed: (){
+                    context.read<MessageBloc>().add(DeleteMessageEvent(
+                      contact: contact
+                    ));
+                  })
 
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ListMessage(contact: contact),
-
-              SendMessage(contact: contact)
             ],
           ),
-        ),
-      )
+          body:Conversation(
+            contact: contact,
+          )
 
-    );
+      );
+    });
   }
 }

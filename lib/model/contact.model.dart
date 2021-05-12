@@ -14,9 +14,6 @@ class Contact{
     Message(content: "Bonjour comment allez vous ?",type: TypeMessage.RECEIVE)
   ];
   List<Message> messagesToDelete = [];
-  Color myColor = Color.fromARGB(255,Random().nextInt(255) , Random().nextInt(255), Random().nextInt(255));
-
-
   Contact({this.name, this.profile, this.score, this.type});
   
 }

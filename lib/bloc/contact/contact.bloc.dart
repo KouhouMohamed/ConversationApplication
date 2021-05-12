@@ -45,6 +45,9 @@ class ContactBloc extends Bloc<ContactEvent,ContactState>{
         yield ContactState(contacts: state.contacts,errorMessage:e.message,requestState: RequestState.ERROR,currentEvent: event);
       }
     }
+    else if(event is AddMessageToDeleteList){
+      event.contact.messagesToDelete.add(event.messageToDelete);
+    }
   }
 
 }

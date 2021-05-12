@@ -24,7 +24,7 @@ class ItemContact extends StatelessWidget {
             children: [
               CircleAvatar(
                 child: Text(contact.profile),
-                backgroundColor: contact.myColor,
+                backgroundColor: Colors.orange,
               ),
               SizedBox(width: 6,),
               Text(contact.name)
@@ -32,7 +32,7 @@ class ItemContact extends StatelessWidget {
           ),
           CircleAvatar(
               child: Text('${contact.score}'),
-              backgroundColor: contact.myColor,
+              backgroundColor: Colors.orange,
           )
         ],
       ),

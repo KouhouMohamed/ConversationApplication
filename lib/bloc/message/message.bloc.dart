@@ -10,6 +10,25 @@ class MessageBloc extends Bloc<MessageEvent,MessageState>{
 
   @override
   Stream<MessageState> mapEventToState(MessageEvent event) async*{
+    if(event is RemoveMessageFromDeleteList){
+      event.contact.messagesToDelete.remove(event.messageToDelete);
+      yield MessageState(messagesToDelete: event.contact.messagesToDelete);
+    }
+    if(event is AddMessageToDeleteList){
+        event.contact.messagesToDelete.add(event.messageToDelete);
+        yield MessageState(messagesToDelete: event.contact.messagesToDelete);
+    }
+    if(event is DeleteMessageEvent){
+      event.contact.messagesToDelete.forEach((element) {
+        event.contact.messages.remove(element);
+      });
+      event.contact.messagesToDelete = [];
+      yield MessageState(contact: event.contact,messages: event.contact.messages);
+
+    }
+    /*if(event is AddMessageToDeleteList){
+      event.contact.messagesToDelete.add(event.messageToDelete);
+    }*/
     if(event is GetContactEvent){
       yield MessageState(contact: event.contact,messages: event.contact.messages);
     }
@@ -21,7 +40,7 @@ class MessageBloc extends Bloc<MessageEvent,MessageState>{
      message = Message(content: "Answer to '${event.messageToSend}'",type:TypeMessage.RECEIVE);
      data.add(message);
      event.contact.messages = data;
-     yield MessageState(messages: data);
+     yield MessageState(contact: event.contact, messages: data);
     }
   }
 
